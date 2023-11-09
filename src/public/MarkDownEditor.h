@@ -1,14 +1,10 @@
 #pragma once
-#include "Command.h"
-#include "CommandFactory.h"
-#include <deque>
-#include <iostream>
+#include "EditorState.h"
 
-
-class MarkDownEditor{
+class MarkDownEditor
+{
 private:
-    std::deque<Command*> command_history;
-    std::deque<Command*> undo_cache;
+    EditorState state;
 
 public:
     MarkDownEditor();

@@ -1,9 +1,12 @@
 #pragma once
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 #include <vector>
 #include <string>
 
-enum CommandType {
+class EditorState;
+
+enum CommandType
+{
   kAppendHead,
   kAppendTail,
   kInsert,
@@ -22,13 +25,14 @@ enum CommandType {
   kExit
 };
 
-class Command{
+class Command
+{
 protected:
-    bool add2HistoryStack;
-    std::vector<std::string> para;
+  bool add2HistoryStack;
+  std::vector<std::string> para;
 
 public:
-    virtual void exec() = 0;
-    virtual void undo();
-    bool getAdd2HistoryStack(){ return add2HistoryStack;}
+  virtual void exec(EditorState &state) = 0;
+  virtual void undo(EditorState &state);
+  bool getAdd2HistoryStack() { return add2HistoryStack; }
 };

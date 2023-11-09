@@ -1,8 +1,10 @@
 #pragma once
-#include "Command.h"
-#include "Command_Exit.h"
+#include <vector>
+#include <string>
+class Command;
 
-class CommandFactory{
+class CommandFactory
+{
 public:
-    static Command* GetCommand();
+    static Command *GetCommand(std::vector<std::string> para);
 };

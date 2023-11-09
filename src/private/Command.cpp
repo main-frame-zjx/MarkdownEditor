@@ -1,6 +1,6 @@
 #include "Command.h"
 
-
-void Command::undo(){
-    return ;
+void Command::undo(EditorState &state)
+{
+    return;
 }
