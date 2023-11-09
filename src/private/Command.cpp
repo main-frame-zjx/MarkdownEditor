@@ -1,4 +1,4 @@
-#include "public/Command.h"
+#include "Command.h"
 
 
 void Command::undo(){

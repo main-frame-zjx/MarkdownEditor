@@ -1,6 +1,8 @@
 #pragma once
 #include "Command.h"
+#include "CommandFactory.h"
 #include <deque>
+#include <iostream>
 
 
 class MarkDownEditor{
