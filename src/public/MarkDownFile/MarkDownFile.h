@@ -10,4 +10,5 @@ private:
 public:
     MarkDownFile(std::string url_in);
     void save();
+    std::string getURL() { return url; }
 };

@@ -35,4 +35,5 @@ public:
   virtual void exec(EditorState &state) = 0;
   virtual void undo(EditorState &state);
   bool getAdd2HistoryStack() { return add2HistoryStack; }
+  Command(std::vector<std::string> para);
 };

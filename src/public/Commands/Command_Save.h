@@ -1,9 +1,9 @@
 #pragma once
 #include "Command.h"
 
-class Command_Load : public Command
+class Command_Save : public Command
 {
 public:
     virtual void exec(EditorState &state) override;
-    Command_Load(std::vector<std::string> para);
+    Command_Save(std::vector<std::string> para);
 };
