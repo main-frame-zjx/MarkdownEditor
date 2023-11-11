@@ -30,14 +30,20 @@ class Command
 {
 protected:
   CommandType type;
-  bool add2HistoryStack;
+  bool add2HistoryStack = true;
+  bool canUndo = false;
   std::vector<std::string> para;
   std::string raw_para;
+  bool succ;
+  virtual void exec(EditorState &state) = 0;
 
 public:
-  virtual void exec(EditorState &state) = 0;
+  void exec_wrapper(EditorState &state);
   virtual void undo(EditorState &state);
   bool getAdd2HistoryStack() { return add2HistoryStack; }
+  bool getSucc() { return succ; }
+  bool getCanUndo() { return canUndo; }
   Command(std::string raw_para, std::vector<std::string> para, CommandType type);
   CommandType getType() { return type; }
+  void errorDown(std::string info);
 };

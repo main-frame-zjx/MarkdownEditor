@@ -19,3 +19,13 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(false), url(url_in)
 void MarkDownFile::save()
 {
 }
+
+void MarkDownFile::insertWord(int line, std::string word)
+{
+}
+void MarkDownFile::deleteLine(int line, std::string *store = nullptr)
+{
+}
+void MarkDownFile::deleteWord(std::string word, int *store_line = nullptr)
+{
+}

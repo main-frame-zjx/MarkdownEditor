@@ -13,7 +13,7 @@ void MarkDownEditor::Launch()
         string line;
         getline(cin, line);
         Command *cmd = CommandFactory::GetCommand(line);
-        cmd->exec(state);
+        cmd->exec_wrapper(state);
     }
 }
 

@@ -14,4 +14,5 @@ void Command_Switch::exec(EditorState &state)
 Command_Switch::Command_Switch(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kSwitch)
 {
     add2HistoryStack = true;
+    canUndo = false;
 }

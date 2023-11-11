@@ -6,6 +6,14 @@ using std::string, std::vector;
 void Command_Load::exec(EditorState &state)
 {
     std::string file_name = getStrParam(para, 1);
+    for (auto file : state.load_files)
+    {
+        if (file->getURL() == file_name)
+        {
+            errorDown(file_name + " is already open.");
+            return;
+        }
+    }
     if (file_name.empty())
         return;
     auto markDownFilePtr = new MarkDownFile(file_name);
@@ -16,4 +24,5 @@ void Command_Load::exec(EditorState &state)
 Command_Load::Command_Load(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kLoad)
 {
     add2HistoryStack = true;
+    canUndo = false;
 }
