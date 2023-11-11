@@ -12,44 +12,46 @@
 #include "Command_Delete.h"
 #include "Command_Undo.h"
 #include "Command_Redo.h"
+#include "ParamUtil.h"
 
-Command *CommandFactory::GetCommand(std::vector<std::string> para)
+Command *CommandFactory::GetCommand(std::string raw_para)
 {
+    std::vector<std::string> para = stringSplit(raw_para, ' ');
     if (para[0] == std::string("load"))
     {
-        return new Command_Load(para);
+        return new Command_Load(raw_para, para);
     }
     else if (para[0] == std::string("ws"))
     {
-        return new Command_WorkSpace(para);
+        return new Command_WorkSpace(raw_para, para);
     }
     else if (para[0] == std::string("switch"))
     {
-        return new Command_Switch(para);
+        return new Command_Switch(raw_para, para);
     }
     else if (para[0] == std::string("save"))
     {
-        return new Command_Save(para);
+        return new Command_Save(raw_para, para);
     }
     else if (para[0] == std::string("insert"))
     {
-        return new Command_Insert(para);
+        return new Command_Insert(raw_para, para);
     }
     else if (para[0] == std::string("append-head"))
     {
-        return new Command_AppendHead(para);
+        return new Command_AppendHead(raw_para, para);
     }
     else if (para[0] == std::string("delete"))
     {
-        return new Command_Delete(para);
+        return new Command_Delete(raw_para, para);
     }
     else if (para[0] == std::string("undo"))
     {
-        return new Command_Undo(para);
+        return new Command_Undo(raw_para, para);
     }
     else if (para[0] == std::string("redo"))
     {
-        return new Command_Redo(para);
+        return new Command_Redo(raw_para, para);
     }
-    return new Command_Exit(para);
+    return new Command_Exit(raw_para, para);
 }

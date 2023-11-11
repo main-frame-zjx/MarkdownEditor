@@ -11,7 +11,7 @@ void Command_WorkSpace::exec(EditorState &state)
     }
 }
 
-Command_WorkSpace::Command_WorkSpace(std::vector<std::string> para) : Command(para)
+Command_WorkSpace::Command_WorkSpace(std::vector<std::string> para) : Command(para, CommandType::kWs)
 {
     add2HistoryStack = true;
 }

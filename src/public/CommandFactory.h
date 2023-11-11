@@ -6,5 +6,5 @@ class Command;
 class CommandFactory
 {
 public:
-    static Command *GetCommand(std::vector<std::string> para);
+    static Command *GetCommand(std::string raw_para);
 };

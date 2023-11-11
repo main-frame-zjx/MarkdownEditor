@@ -22,18 +22,22 @@ enum CommandType
   kDirTree,
   kHistory,
   kStats,
-  kExit
+  kExit,
+  kWs
 };
 
 class Command
 {
 protected:
+  CommandType type;
   bool add2HistoryStack;
   std::vector<std::string> para;
+  std::string raw_para;
 
 public:
   virtual void exec(EditorState &state) = 0;
   virtual void undo(EditorState &state);
   bool getAdd2HistoryStack() { return add2HistoryStack; }
-  Command(std::vector<std::string> para);
+  Command(std::string raw_para, std::vector<std::string> para, CommandType type);
+  CommandType getType() { return type; }
 };
