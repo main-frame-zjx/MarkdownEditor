@@ -1,0 +1,7 @@
+load a.md
+insert 1 # Title1
+append-tail # Title2
+append-tail # Title3
+append-tail ## Title4
+append-head # This is a.md
+list

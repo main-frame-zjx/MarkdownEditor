@@ -27,7 +27,7 @@ void Command_Undo::exec(EditorState &state)
     last_cmd->undo(state);
 }
 
-Command_Undo::Command_Undo(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kInsert)
+Command_Undo::Command_Undo(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kUndo)
 {
     add2HistoryStack = true;
     canUndo = false;

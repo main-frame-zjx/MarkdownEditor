@@ -12,6 +12,7 @@
 #include "Command_Delete.h"
 #include "Command_Undo.h"
 #include "Command_Redo.h"
+#include "Command_Null.h"
 #include "ParamUtil.h"
 
 Command *CommandFactory::GetCommand(std::string raw_para)
@@ -41,6 +42,10 @@ Command *CommandFactory::GetCommand(std::string raw_para)
     {
         return new Command_AppendHead(raw_para, para);
     }
+    else if (para[0] == std::string("append-tail"))
+    {
+        return new Command_AppendTail(raw_para, para);
+    }
     else if (para[0] == std::string("delete"))
     {
         return new Command_Delete(raw_para, para);
@@ -53,5 +58,13 @@ Command *CommandFactory::GetCommand(std::string raw_para)
     {
         return new Command_Redo(raw_para, para);
     }
-    return new Command_Exit(raw_para, para);
+    else if (para[0] == std::string("list"))
+    {
+        return new Command_List(raw_para, para);
+    }
+    else if (para[0] == std::string("exit"))
+    {
+        return new Command_Exit(raw_para, para);
+    }
+    return new Command_Null(raw_para, para);
 }

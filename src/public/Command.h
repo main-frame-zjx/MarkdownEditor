@@ -23,7 +23,8 @@ enum CommandType
   kHistory,
   kStats,
   kExit,
-  kWs
+  kWs,
+  kNull
 };
 
 class Command

@@ -16,7 +16,7 @@ void Command_AppendHead::exec(EditorState &state)
     state.load_files[state.current_focus_file]->insertWord(insert_line, word);
 }
 
-Command_AppendHead::Command_AppendHead(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kInsert)
+Command_AppendHead::Command_AppendHead(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kAppendHead)
 {
     add2HistoryStack = true;
     canUndo = true;

@@ -11,7 +11,7 @@ void Command_Save::exec(EditorState &state)
     }
 }
 
-Command_Save::Command_Save(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kLoad)
+Command_Save::Command_Save(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kSave)
 {
     add2HistoryStack = true;
     canUndo = false;

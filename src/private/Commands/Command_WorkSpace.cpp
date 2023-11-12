@@ -8,16 +8,12 @@ void Command_WorkSpace::exec(EditorState &state)
     for (int i = 0; i < state.load_files.size(); i++)
     {
         auto file = state.load_files[i];
-        cout << i << " " << file->getURL();
+        cout << i + 1 << " " << file->getURL();
         if (file->isDirty())
             cout << '*';
         if (i == state.current_focus_file)
             cout << '<';
         cout << endl;
-    }
-    for (auto file : state.load_files)
-    {
-        cout << file->getURL() << endl;
     }
 }
 

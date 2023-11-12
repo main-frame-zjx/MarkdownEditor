@@ -31,6 +31,32 @@ int getIntParam(const vector<string> &para, int index)
     return -1;
 }
 
+int tryGetIntParam(const vector<string> &para, int index)
+{
+    // 检查索引是否越界
+    if (index < 0 || index >= static_cast<int>(para.size()))
+    {
+        std::cerr << "Error: Index out of range." << std::endl;
+        return -1;
+    }
+
+    try
+    {
+        return std::stoi(para[index]);
+    }
+    catch (const std::invalid_argument &e)
+    {
+        return -1;
+    }
+    catch (const std::out_of_range &e)
+    {
+        return -1;
+    }
+
+    // 转换失败，返回 -1
+    return -1;
+}
+
 string getStrParam(const vector<string> &para, int index)
 {
     // 检查索引是否越界
@@ -39,6 +65,7 @@ string getStrParam(const vector<string> &para, int index)
         std::cerr << "Error: Index out of range." << std::endl;
         return string("");
     }
+    return para[index];
 }
 
 string getLongStrParam(const string &str, int index)

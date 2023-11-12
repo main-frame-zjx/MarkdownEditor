@@ -2,8 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include <assert.h>
+#include <MarkDownRoot.h>
+#include <MarkDownTitle.h>
+#include <MarkDownBody.h>
+#include <iostream>
+using std::cout, std::endl;
 
-MarkDownFile::MarkDownFile(std::string url_in) : dirty(false), url(url_in)
+MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in)
 {
     std::fstream inFile;
     // 如果文件未创建，创建空文件
@@ -14,18 +19,57 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(false), url(url_in)
     assert(inFile);
 
     inFile.close();
+    list_root = new MarkDownRoot();
+    // tree_root = new MarkDownRoot();
+}
+
+MarkDownComponent *MarkDownFile::str2Comp(std::string str)
+{
+    MarkDownComponent *ret = nullptr;
+    if (str[0] == '#')
+        ret = new MarkDownTitle(str);
+    else
+        ret = new MarkDownBody(str);
+    return ret;
+}
+
+MarkDownFile::~MarkDownFile()
+{
+    delete list_root;
 }
 
 void MarkDownFile::save()
 {
+    dirty = false;
 }
 
 void MarkDownFile::insertWord(int line, std::string word)
 {
+    dirty = true;
+    MarkDownComponent *new_line = str2Comp(word);
+    list_root->insertWord(line, new_line);
 }
-void MarkDownFile::deleteLine(int line, std::string *store = nullptr)
+void MarkDownFile::deleteLine(int line, std::string *store)
+{
+    dirty = true;
+    list_root->deleteLine(line, store);
+}
+void MarkDownFile::deleteWord(std::string word, int *store_line, std::string *store_word)
+{
+    dirty = true;
+    list_root->deleteWord(word, store_line, store_word);
+}
+
+void MarkDownFile::list()
+{
+    for (auto comp : list_root->getChildrenList())
+    {
+        cout << comp->getStr(true) << endl;
+    }
+}
+void MarkDownFile::listTree()
 {
 }
-void MarkDownFile::deleteWord(std::string word, int *store_line = nullptr)
+void MarkDownFile::listDirTree(std::string word)
 {
 }

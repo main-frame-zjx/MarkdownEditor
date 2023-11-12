@@ -20,7 +20,7 @@ void Command_Redo::exec(EditorState &state)
     last_cmd->undo(state);
 }
 
-Command_Redo::Command_Redo(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kInsert)
+Command_Redo::Command_Redo(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kRedo)
 {
     add2HistoryStack = true;
     canUndo = false;

@@ -7,7 +7,16 @@ void Command_Switch::exec(EditorState &state)
 {
     int switch_index = getIntParam(para, 1) - 1;
     if (switch_index < 0)
+    {
+        errorDown("index should >0");
         return;
+    }
+    if (switch_index >= state.load_files.size())
+    {
+        errorDown("index should less than " + std::to_string(state.load_files.size()));
+        return;
+    }
+
     state.current_focus_file = switch_index;
 }
 
