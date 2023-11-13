@@ -36,7 +36,7 @@ int tryGetIntParam(const vector<string> &para, int index)
     // 检查索引是否越界
     if (index < 0 || index >= static_cast<int>(para.size()))
     {
-        std::cerr << "Error: Index out of range." << std::endl;
+        // std::cerr << "Error: Index out of range." << std::endl;
         return -1;
     }
 

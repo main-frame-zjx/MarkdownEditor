@@ -13,6 +13,7 @@
 #include "Command_Undo.h"
 #include "Command_Redo.h"
 #include "Command_Null.h"
+#include "Command_History.h"
 #include "ParamUtil.h"
 
 Command *CommandFactory::GetCommand(std::string raw_para)
@@ -65,6 +66,10 @@ Command *CommandFactory::GetCommand(std::string raw_para)
     else if (para[0] == std::string("exit"))
     {
         return new Command_Exit(raw_para, para);
+    }
+    else if (para[0] == std::string("history"))
+    {
+        return new Command_History(raw_para, para);
     }
     return new Command_Null(raw_para, para);
 }
