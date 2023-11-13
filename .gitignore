@@ -33,3 +33,6 @@
 
 /build
 /.vscode
+*.md
+command_history.txt
+./manual_test/command_history.txt

@@ -47,4 +47,5 @@ public:
   Command(std::string raw_para, std::vector<std::string> para, CommandType type);
   CommandType getType() { return type; }
   void errorDown(std::string info);
+  std::string getRawPara() { return raw_para; }
 };

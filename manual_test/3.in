@@ -1,7 +1,8 @@
-load a.md
+load test3.md
 insert 1 # Title1
 append-tail # Title2
 append-tail # Title3
 append-tail ## Title4
-append-head # This is a.md
+append-head # This is test3.md
 list
+save

@@ -22,9 +22,11 @@ void Command::errorDown(std::string info)
 
 void Command::exec_wrapper(EditorState &state)
 {
+    state.notifyBeforeExec(this);
     this->exec(state);
     if (add2HistoryStack)
     {
-        state.command_history.push_back(this);
+        state.command_history_push_back(this);
     }
+    state.notifyAfterExec(this);
 }

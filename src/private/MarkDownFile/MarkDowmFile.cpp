@@ -6,6 +6,7 @@
 #include <MarkDownTitle.h>
 #include <MarkDownBody.h>
 #include <iostream>
+#include <string>
 using std::cout, std::endl;
 
 MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in)
@@ -17,6 +18,14 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in)
 
     inFile.open(url, std::ios::in);
     assert(inFile);
+    while (!inFile.eof())
+    {
+        std::string str;
+        std::getline(inFile, str);
+        if (str.empty())
+            continue;
+        insertWord(-1, str);
+    }
 
     inFile.close();
     list_root = new MarkDownRoot();
@@ -41,6 +50,13 @@ MarkDownFile::~MarkDownFile()
 void MarkDownFile::save()
 {
     dirty = false;
+    std::fstream inFile;
+    inFile.open(url, std::ios::out);
+    for (auto comp : list_root->getChildrenList())
+    {
+        inFile << comp->getStr(true) << std::endl;
+    }
+    inFile.close();
 }
 
 void MarkDownFile::insertWord(int line, std::string word)

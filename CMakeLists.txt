@@ -7,11 +7,13 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/public")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/public/Commands")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/public/MarkDownFile")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/public/Utils")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/public/logging")
 
 AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/src/private" DIR_SRCS)
 AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/src/private/Commands" DIR_SRCS)
 AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/src/private/MarkDownFile" DIR_SRCS)
 AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/src/private/Utils" DIR_SRCS)
+AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/src/private/logging" DIR_SRCS)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 

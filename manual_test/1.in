@@ -8,6 +8,7 @@ append-tail 3. 单例模式
 insert 6 2. 策略模式
 delete 单例模式
 append-tail 3. 组合模式
-append-tail ## ⼯具箱
+append-tail ## 工具箱
 append-tail ### Adobe
 list
+save

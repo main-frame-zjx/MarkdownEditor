@@ -6,12 +6,12 @@ using std::string, std::vector;
 
 void Command_Redo::exec(EditorState &state)
 {
-    if (state.command_history.empty())
+    if (state.command_history_empty())
     {
         errorDown("no history command");
         return;
     }
-    auto last_cmd = state.command_history.back();
+    auto last_cmd = state.command_history_back();
     if (!(last_cmd->getType() == CommandType::kUndo))
     {
         errorDown("you can only use 'redo' after 'undo'.");
