@@ -163,7 +163,6 @@ void MarkDownFile::updateTree()
 
 MarkDownComponent *MarkDownFile::searchComp(std::string word)
 {
-    std::cout << "in searchComp, word: " << word << std::endl;
     for (auto comp : list_root->getChildrenList())
     {
         if (!comp->hasStr())

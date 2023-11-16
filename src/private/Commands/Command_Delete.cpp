@@ -22,7 +22,6 @@ void Command_Delete::exec(EditorState &state)
         return;
     }
     string word = getLongStrParam(raw_para, 1);
-    std::cout << "word: " << word << std::endl;
     if (!word.empty())
     {
         // printf("here\n");

@@ -15,6 +15,7 @@
 #include "Command_Null.h"
 #include "Command_History.h"
 #include "Command_Stats.h"
+#include "Command_Close.h"
 #include "Command_ListTree.h"
 #include "Command_DirTree.h"
 #include "ParamUtil.h"
@@ -85,6 +86,10 @@ Command *CommandFactory::GetCommand(std::string raw_para)
     else if (para[0] == std::string("dir-tree"))
     {
         return new Command_DirTree(raw_para, para);
+    }
+    else if (para[0] == std::string("close"))
+    {
+        return new Command_Close(raw_para, para);
     }
     return new Command_Null(raw_para, para);
 }

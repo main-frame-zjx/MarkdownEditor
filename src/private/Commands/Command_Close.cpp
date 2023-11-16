@@ -39,6 +39,6 @@ void Command_Close::exec(EditorState &state)
 
 Command_Close::Command_Close(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kClose)
 {
-    add2HistoryStack = false;
+    add2HistoryStack = true;
     canUndo = false;
 }

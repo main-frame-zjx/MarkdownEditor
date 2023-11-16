@@ -7,7 +7,6 @@ using std::string, std::vector;
 void Command_DirTree::exec(EditorState &state)
 {
     string word = getLongStrParam(raw_para, 1);
-    std::cout << "word: " << word << std::endl;
     state.load_files[state.current_focus_file]->listDirTree(word);
 }
 
