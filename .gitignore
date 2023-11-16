@@ -35,4 +35,5 @@
 /.vscode
 *.md
 command_history.txt
+file_history.txt
 ./manual_test/command_history.txt

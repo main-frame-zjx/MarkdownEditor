@@ -12,7 +12,7 @@ using std::chrono::system_clock;
 MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_start_time(system_clock::now())
 {
     std::fstream inFile;
-
+    list_root = new MarkDownRoot();
     inFile.open(url, std::ios::in);
     if (!inFile)
     {
@@ -32,7 +32,7 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_
     }
 
     inFile.close();
-    list_root = new MarkDownRoot();
+
     // tree_root = new MarkDownRoot();
 }
 
