@@ -1,5 +1,6 @@
 #include <MarkDownBody.h>
 #include <iostream>
+#include <algorithm>
 std::list<MarkDownComponent *> MarkDownBody::getChildrenList()
 {
     return std::list<MarkDownComponent *>();
@@ -34,7 +35,12 @@ MarkDownBody::MarkDownBody(std::string raw_str) : MarkDownComponent(ComponentTyp
     content = raw_str.substr(lastPos, len - lastPos);
 }
 
-int MarkDownBody::getSpaceLine()
+bool MarkDownBody::isHigherThan(MarkDownComponent *comp)
 {
-    return 1;
+    return false;
+}
+
+std::string MarkDownBody::getForShowStr()
+{
+    return prefix + content;
 }

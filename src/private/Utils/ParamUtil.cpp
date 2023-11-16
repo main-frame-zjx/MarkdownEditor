@@ -68,6 +68,16 @@ string getStrParam(const vector<string> &para, int index)
     return para[index];
 }
 
+string tryGetStrParam(const vector<string> &para, int index)
+{
+    // 检查索引是否越界
+    if (index < 0 || index >= static_cast<int>(para.size()))
+    {
+        return string("");
+    }
+    return para[index];
+}
+
 string getLongStrParam(const string &str, int index)
 {
     char delim = ' ';

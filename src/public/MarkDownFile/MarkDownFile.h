@@ -8,8 +8,11 @@ private:
     bool dirty;
     std::string url;
     MarkDownRoot *list_root;
-    // MarkDownRoot *tree_root;
+    MarkDownRoot *tree_root;
     MarkDownComponent *str2Comp(std::string);
+    void updateTree();
+    void listSubTree(MarkDownComponent *, int deep, int flag);
+    MarkDownComponent *searchComp(std::string);
     std::chrono::system_clock::time_point file_start_time;
 
 public:

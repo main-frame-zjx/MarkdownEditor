@@ -10,10 +10,14 @@ private:
 
 public:
     MarkDownTitle(std::string raw_str);
-    virtual int getSpaceLine() override;
     virtual std::list<MarkDownComponent *> getChildrenList() override;
     ~MarkDownTitle();
     virtual bool hasChild() override;
+    virtual void addChild(MarkDownComponent *) override;
     virtual std::string getStr(bool raw) override;
+    virtual std::string getForShowStr() override;
     virtual bool hasStr() override;
+    virtual bool isHigherThan(MarkDownComponent *) override;
+    int getTitleLevel() { return titleLevel; }
+    virtual void flushChildrenList() override;
 };

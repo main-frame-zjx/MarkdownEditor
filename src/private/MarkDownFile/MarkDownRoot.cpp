@@ -79,12 +79,27 @@ MarkDownRoot::MarkDownRoot() : MarkDownComponent(ComponentType::kRoot)
 {
 }
 
-int MarkDownRoot::getSpaceLine()
+bool MarkDownRoot::isHigherThan(MarkDownComponent *comp)
 {
-    int ret = 0;
-    for (auto child : childrenList)
+    if (comp->type == ComponentType::kRoot)
     {
-        ret += child->getSpaceLine();
+        std::cout << "You can't compare two MarkDownRoot" << std::endl;
+        return false;
     }
-    return ret;
+    return true;
+}
+
+void MarkDownRoot::addChild(MarkDownComponent *comp)
+{
+    childrenList.push_back(comp);
+}
+
+void MarkDownRoot::flushChildrenList()
+{
+    childrenList.clear();
+}
+
+std::string MarkDownRoot::getForShowStr()
+{
+    return "";
 }

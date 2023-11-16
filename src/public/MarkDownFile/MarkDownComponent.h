@@ -19,10 +19,13 @@ public:
     MarkDownComponent(ComponentType type) : type(type), parent(nullptr) {}
     virtual ~MarkDownComponent() {}
     virtual std::list<MarkDownComponent *> getChildrenList() = 0;
-    virtual int getSpaceLine() = 0;
+    virtual void addChild(MarkDownComponent *) = 0;
     virtual bool hasChild() = 0;
     virtual std::string getStr(bool raw) = 0;
+    virtual std::string getForShowStr() = 0;
     virtual bool hasStr() = 0;
+    virtual bool isHigherThan(MarkDownComponent *) = 0;
+    virtual void flushChildrenList() = 0;
     // virtual void insertWord(int line, MarkDownComponent *comp) = 0;
     // virtual void deleteLine(int line, std::string *store = nullptr) = 0;
     // virtual void deleteWord(std::string word, int *store_line = nullptr) = 0;

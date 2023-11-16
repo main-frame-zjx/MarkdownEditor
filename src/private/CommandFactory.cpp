@@ -14,6 +14,9 @@
 #include "Command_Redo.h"
 #include "Command_Null.h"
 #include "Command_History.h"
+#include "Command_Stats.h"
+#include "Command_ListTree.h"
+#include "Command_DirTree.h"
 #include "ParamUtil.h"
 
 Command *CommandFactory::GetCommand(std::string raw_para)
@@ -70,6 +73,18 @@ Command *CommandFactory::GetCommand(std::string raw_para)
     else if (para[0] == std::string("history"))
     {
         return new Command_History(raw_para, para);
+    }
+    else if (para[0] == std::string("stats"))
+    {
+        return new Command_Stats(raw_para, para);
+    }
+    else if (para[0] == std::string("list-tree"))
+    {
+        return new Command_ListTree(raw_para, para);
+    }
+    else if (para[0] == std::string("dir-tree"))
+    {
+        return new Command_DirTree(raw_para, para);
     }
     return new Command_Null(raw_para, para);
 }

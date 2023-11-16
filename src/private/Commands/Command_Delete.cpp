@@ -2,6 +2,7 @@
 #include "EditorState.h"
 #include "MarkDownFile.h"
 #include "ParamUtil.h"
+#include "iostream"
 using std::string, std::vector;
 
 void Command_Delete::exec(EditorState &state)
@@ -21,6 +22,7 @@ void Command_Delete::exec(EditorState &state)
         return;
     }
     string word = getLongStrParam(raw_para, 1);
+    std::cout << "word: " << word << std::endl;
     if (!word.empty())
     {
         // printf("here\n");

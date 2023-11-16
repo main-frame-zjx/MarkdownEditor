@@ -4,21 +4,25 @@
 #include "CommandFactory.h"
 #include "CommandHistoryListener.h"
 #include "FileHistoryListener.h"
-using std::cin, std::cout;
+#include <locale>
+#include <string>
 using std::endl;
-using std::string;
+using std::wcin, std::wcout;
+using std::wstring;
 
 void MarkDownEditor::Launch()
 {
+    // 设置输出流的locale为UTF-8
+    std::wcout.imbue(std::locale("en_US.UTF-8"));
     state.addListener(new CommandHistoryListener("command_history.txt"));
     state.addListener(new FileHistoryListener("file_history.txt"));
     while (true)
     {
 
-        string line;
-        if (cin.eof())
+        wstring line;
+        if (wcin.eof())
             break;
-        getline(cin, line);
+        std::getline(wcin, line);
 
         Command *cmd = CommandFactory::GetCommand(line);
 

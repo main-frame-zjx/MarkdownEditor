@@ -1,5 +1,7 @@
 #include <MarkDownTitle.h>
 #include <assert.h>
+#include <iostream>
+#include <algorithm>
 std::list<MarkDownComponent *> MarkDownTitle::getChildrenList()
 {
     return childrenList;
@@ -38,12 +40,34 @@ MarkDownTitle::MarkDownTitle(std::string raw_str) : MarkDownComponent(ComponentT
     titleLevel = lastPos;
 }
 
-int MarkDownTitle::getSpaceLine()
+bool MarkDownTitle::isHigherThan(MarkDownComponent *comp)
 {
-    int ret = 1;
-    for (auto child : childrenList)
+    if (comp->type == ComponentType::kRoot)
     {
-        ret += child->getSpaceLine();
+        std::cout << "You can't compare MarkDownRoot to MarkDownTitle" << std::endl;
+        return false;
     }
-    return ret;
+    else if (comp->type == ComponentType::kBody)
+        return true;
+    else
+    {
+        auto title_comp = dynamic_cast<MarkDownTitle *>(comp);
+        return titleLevel < title_comp->getTitleLevel();
+    }
+}
+void MarkDownTitle::addChild(MarkDownComponent *comp)
+{
+    childrenList.push_back(comp);
+}
+
+void MarkDownTitle::flushChildrenList()
+{
+    childrenList.clear();
+}
+
+std::string MarkDownTitle::getForShowStr()
+{
+    std::string str_cp = content;
+    str_cp.erase(std::remove_if(str_cp.begin(), str_cp.end(), ::isspace), str_cp.end());
+    return str_cp;
 }

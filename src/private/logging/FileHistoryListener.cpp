@@ -38,7 +38,7 @@ static std::string current_time()
     return std::string(buf);
 }
 
-std::string duration_time(system_clock::time_point startTime, system_clock::time_point endTime)
+static std::string duration_time(system_clock::time_point startTime, system_clock::time_point endTime)
 {
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
     int hour = 0, min = 0, sec = 0;
