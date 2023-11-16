@@ -6,3 +6,4 @@ append-tail ## Title4
 append-head # This is test3.md
 list
 save
+exit

@@ -3,6 +3,7 @@
 #include "Command.h"
 #include "CommandFactory.h"
 #include "CommandHistoryListener.h"
+#include "FileHistoryListener.h"
 using std::cin, std::cout;
 using std::endl;
 using std::string;
@@ -10,6 +11,7 @@ using std::string;
 void MarkDownEditor::Launch()
 {
     state.addListener(new CommandHistoryListener("command_history.txt"));
+    state.addListener(new FileHistoryListener("file_history.txt"));
     while (true)
     {
 

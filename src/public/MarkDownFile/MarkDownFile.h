@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <MarkDownRoot.h>
+#include <chrono>
 class MarkDownFile
 {
 private:
@@ -9,6 +10,7 @@ private:
     MarkDownRoot *list_root;
     // MarkDownRoot *tree_root;
     MarkDownComponent *str2Comp(std::string);
+    std::chrono::system_clock::time_point file_start_time;
 
 public:
     MarkDownFile(std::string url_in);
@@ -24,4 +26,5 @@ public:
     void list();
     void listTree();
     void listDirTree(std::string word);
+    std::chrono::system_clock::time_point getFileStartTime() { return file_start_time; }
 };

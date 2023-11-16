@@ -12,5 +12,5 @@ private:
 public:
     CommandHistoryListener(std::string logPath);
     ~CommandHistoryListener();
-    virtual void notifyAfterExec(Command *cmd) override;
+    virtual void notifyAfterExec(Command *cmd, EditorState &state) override;
 };

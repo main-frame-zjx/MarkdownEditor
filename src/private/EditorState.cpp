@@ -1,4 +1,5 @@
 #include "EditorState.h"
+#include "LogListenerBase.h"
 
 void EditorState::command_history_push_back(Command *cmd) { command_history.push_back(cmd); }
 bool EditorState::command_history_empty() { return command_history.empty(); }
@@ -11,10 +12,14 @@ void EditorState::addListener(LogListenerBase *listener)
 void EditorState::notifyBeforeExec(Command *cmd)
 {
     for (auto listener : listeners)
-        listener->notifyBeforeExec(cmd);
+        listener->notifyBeforeExec(cmd, *this);
 }
 void EditorState::notifyAfterExec(Command *cmd)
 {
     for (auto listener : listeners)
-        listener->notifyAfterExec(cmd);
+        listener->notifyAfterExec(cmd, *this);
+}
+
+EditorState::EditorState()
+{
 }

@@ -8,15 +8,19 @@
 #include <iostream>
 #include <string>
 using std::cout, std::endl;
-
-MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in)
+using std::chrono::system_clock;
+MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_start_time(system_clock::now())
 {
     std::fstream inFile;
-    // 如果文件未创建，创建空文件
-    inFile.open(url, std::ios::out);
-    inFile.close();
 
     inFile.open(url, std::ios::in);
+    if (!inFile)
+    {
+        // 如果文件未创建，创建空文件
+        inFile.open(url, std::ios::out);
+        inFile.close();
+        inFile.open(url, std::ios::in);
+    }
     assert(inFile);
     while (!inFile.eof())
     {

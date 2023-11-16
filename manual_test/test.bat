@@ -1,5 +1,5 @@
 copy ..\MarkDownEditor.exe .\MarkDownEditor.exe
-
+del *.md
 
 @echo off
 setlocal enabledelayedexpansion

@@ -8,7 +8,7 @@
 
 using std::chrono::system_clock;
 
-std::string current_time()
+static std::string current_time()
 {
     system_clock::time_point tp = system_clock::now();
 
@@ -62,7 +62,7 @@ CommandHistoryListener::CommandHistoryListener(std::string logPath) : logFile(lo
     }
 }
 
-void CommandHistoryListener::notifyAfterExec(Command *cmd)
+void CommandHistoryListener::notifyAfterExec(Command *cmd, EditorState &state)
 {
     // Record the current time and command type in the log file
     logFile << current_time() << " "
