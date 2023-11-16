@@ -10,7 +10,7 @@
 #include <algorithm>
 using std::cout, std::endl;
 using std::chrono::system_clock;
-MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_start_time(system_clock::now())
+MarkDownFile::MarkDownFile(std::string url_in) : dirty(false), url(url_in), file_start_time(system_clock::now())
 {
     std::fstream inFile;
     list_root = new MarkDownRoot();
@@ -34,6 +34,7 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_
     }
 
     inFile.close();
+    dirty = false;
 
     // tree_root = new MarkDownRoot();
 }

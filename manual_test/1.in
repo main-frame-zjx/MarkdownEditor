@@ -11,6 +11,7 @@ append-tail 3. 组合模式
 append-tail ## 工具箱
 append-tail ### Adobe
 list
-dir-tree 我的资源
+list-tree
+dir-tree 设计模式
 save
 exit
