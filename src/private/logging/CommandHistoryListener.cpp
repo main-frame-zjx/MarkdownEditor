@@ -5,10 +5,11 @@
 #include <iomanip>
 #include <string>
 #include <memory>
+#include "ParamUtil.h"
 
 using std::chrono::system_clock;
 
-static std::string current_time()
+static std::wstring current_time()
 {
     system_clock::time_point tp = system_clock::now();
 
@@ -17,22 +18,23 @@ static std::string current_time()
     // tm*使用完后不用delete，因为tm*是由localtime创建的，并且每个线程中会有一个
     struct tm *timeinfo = std::localtime(&raw_time);
 
-    char buf[24] = {0};
+    wchar_t buf[24] = {0};
     // 标准c++中也可以使用"%F %X,"，但VC2017中不能这样用
-    strftime(buf, 24, "%Y-%m-%d %H:%M:%S,", timeinfo);
+    // strftime(buf, 24, "%Y-%m-%d %H:%M:%S,", timeinfo);
+    std::wcsftime(buf, 24, L"%Y-%m-%d %H:%M:%S,", timeinfo);
 
     // tm只能到秒，毫秒需要另外获取
     // std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch());
 
-    // std::string milliseconds_str = std::to_string(ms.count() % 1000);
+    // std::wstring milliseconds_str = std::to_string(ms.count() % 1000);
 
     // if (milliseconds_str.length() < 3)
     // {
-    //     milliseconds_str = std::string(3 - milliseconds_str.length(), '0') + milliseconds_str;
+    //     milliseconds_str = std::wstring(3 - milliseconds_str.length(), '0') + milliseconds_str;
     // }
 
-    // return std::string(buf) + milliseconds_str;
-    return std::string(buf);
+    // return std::wstring(buf) + milliseconds_str;
+    return std::wstring(buf);
 }
 
 // auto getFormatNowTime()
@@ -50,15 +52,15 @@ static std::string current_time()
 //     return std::put_time(&tmStruct, "%Y%m%d %H:%M:%S");
 // }
 
-CommandHistoryListener::CommandHistoryListener(std::string logPath) : logFile(logPath, std::ios::app)
+CommandHistoryListener::CommandHistoryListener(std::wstring logPath) : logFile(wstring2string(logPath), std::ios::app)
 {
     if (!logFile.is_open())
     {
-        std::cerr << "Error opening log file: " << logPath << std::endl;
+        std::wcerr << L"Error opening log file: " << logPath << std::endl;
     }
     else
     {
-        logFile << "session start at " << current_time() << std::endl;
+        logFile << L"session start at " << current_time() << std::endl;
     }
 }
 
@@ -66,7 +68,7 @@ void CommandHistoryListener::notifyAfterExec(Command *cmd, EditorState &state)
 {
     // Record the current time and command type in the log file
     logFile << current_time() << " "
-            << cmd->getRawPara() << (cmd->getSucc() ? " | succ" : " | fail") << std::endl;
+            << cmd->getRawPara() << (cmd->getSucc() ? L" | succ" : L" | fail") << std::endl;
 }
 
 CommandHistoryListener::~CommandHistoryListener()

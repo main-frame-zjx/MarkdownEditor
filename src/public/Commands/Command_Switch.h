@@ -5,5 +5,5 @@ class Command_Switch : public Command
 {
 public:
     virtual void exec(EditorState &state) override;
-    Command_Switch(std::string raw_para, std::vector<std::string> para);
+    Command_Switch(std::wstring raw_para, std::vector<std::wstring> para);
 };

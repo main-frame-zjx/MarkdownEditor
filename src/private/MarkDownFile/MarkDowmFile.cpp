@@ -8,25 +8,28 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-using std::cout, std::endl;
+#include <ParamUtil.h>
+using std::wcout, std::endl;
 using std::chrono::system_clock;
-MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_start_time(system_clock::now())
+MarkDownFile::MarkDownFile(std::wstring url_in) : dirty(true), url(url_in), file_start_time(system_clock::now())
 {
-    std::fstream inFile;
+
+    std::wfstream inFile;
     list_root = new MarkDownRoot();
     tree_root = new MarkDownRoot();
-    inFile.open(url, std::ios::in);
+    std::string url_str = wstring2string(url);
+    inFile.open(url_str, std::ios::in);
     if (!inFile)
     {
         // 如果文件未创建，创建空文件
-        inFile.open(url, std::ios::out);
+        inFile.open(url_str, std::ios::out);
         inFile.close();
-        inFile.open(url, std::ios::in);
+        inFile.open(url_str, std::ios::in);
     }
     assert(inFile);
     while (!inFile.eof())
     {
-        std::string str;
+        std::wstring str;
         std::getline(inFile, str);
         if (str.empty())
             continue;
@@ -38,7 +41,7 @@ MarkDownFile::MarkDownFile(std::string url_in) : dirty(true), url(url_in), file_
     // tree_root = new MarkDownRoot();
 }
 
-MarkDownComponent *MarkDownFile::str2Comp(std::string str)
+MarkDownComponent *MarkDownFile::str2Comp(std::wstring str)
 {
     MarkDownComponent *ret = nullptr;
     if (str[0] == '#')
@@ -56,8 +59,9 @@ MarkDownFile::~MarkDownFile()
 void MarkDownFile::save()
 {
     dirty = false;
-    std::fstream inFile;
-    inFile.open(url, std::ios::out);
+    std::wfstream inFile;
+    std::string url_str = wstring2string(url);
+    inFile.open(url_str, std::ios::out);
     for (auto comp : list_root->getChildrenList())
     {
         inFile << comp->getStr(true) << std::endl;
@@ -65,18 +69,18 @@ void MarkDownFile::save()
     inFile.close();
 }
 
-void MarkDownFile::insertWord(int line, std::string word)
+void MarkDownFile::insertWord(int line, std::wstring word)
 {
     dirty = true;
     MarkDownComponent *new_line = str2Comp(word);
     list_root->insertWord(line, new_line);
 }
-void MarkDownFile::deleteLine(int line, std::string *store)
+void MarkDownFile::deleteLine(int line, std::wstring *store)
 {
     dirty = true;
     list_root->deleteLine(line, store);
 }
-void MarkDownFile::deleteWord(std::string word, int *store_line, std::string *store_word)
+void MarkDownFile::deleteWord(std::wstring word, int *store_line, std::wstring *store_word)
 {
     dirty = true;
     list_root->deleteWord(word, store_line, store_word);
@@ -86,7 +90,7 @@ void MarkDownFile::list()
 {
     for (auto comp : list_root->getChildrenList())
     {
-        cout << comp->getStr(true) << endl;
+        wcout << comp->getStr(true) << endl;
     }
 }
 void MarkDownFile::listTree()
@@ -94,40 +98,42 @@ void MarkDownFile::listTree()
     updateTree();
     listSubTree(tree_root, 0, 0);
 }
-void MarkDownFile::listDirTree(std::string word)
+void MarkDownFile::listDirTree(std::wstring word)
 {
     updateTree();
     MarkDownComponent *comp = searchComp(word);
     if (comp == nullptr)
     {
-        std::cout << "didn't find '" << word << "' in file." << std::endl;
+        std::wcout << L"didn't find '" << word << L"' in file." << std::endl;
         return;
     }
     listSubTree(comp, 1, 0);
 }
 // flag的第i位表示之前第i层是不是中间
-static std::string getListStr(MarkDownComponent *comp, int deep, int flag)
+static std::wstring getListStr(MarkDownComponent *comp, int deep, int flag)
 {
     assert(deep > 0);
-    std::string ret = "";
+    std::wstring ret = L"";
     for (int i = 0; i < deep - 1; i++)
     {
         if (flag & (1 << i))
-            ret += "| ";
+            ret += L"|  ";
         else
-            ret += "  ";
+            ret += L"   ";
     }
     if (flag & (1 << (deep - 1)))
-        ret += "├─";
+        //
+        ret += L"|--";
     else
-        ret += "└─";
+        // ret += L"└─";
+        ret += L"|--";
     ret += comp->getForShowStr();
     return ret;
 }
 void MarkDownFile::listSubTree(MarkDownComponent *comp, int deep, int flag)
 {
     if (comp->hasStr())
-        std::cout << getListStr(comp, deep, flag) << std::endl;
+        std::wcout << getListStr(comp, deep, flag) << std::endl;
     if (!comp->hasChild())
         return;
     for (auto child_comp : comp->getChildrenList())
@@ -161,9 +167,8 @@ void MarkDownFile::updateTree()
     }
 }
 
-MarkDownComponent *MarkDownFile::searchComp(std::string word)
+MarkDownComponent *MarkDownFile::searchComp(std::wstring word)
 {
-    std::cout << "in searchComp, word: " << word << std::endl;
     for (auto comp : list_root->getChildrenList())
     {
         if (!comp->hasStr())

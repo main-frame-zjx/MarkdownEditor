@@ -7,16 +7,16 @@ void Command::undo(EditorState &state)
     return;
 }
 
-Command::Command(std::string raw_para, std::vector<std::string> para, CommandType type) : raw_para(raw_para),
+Command::Command(std::wstring raw_para, std::vector<std::wstring> para, CommandType type) : raw_para(raw_para),
                                                                                           para(para),
                                                                                           type(type),
                                                                                           succ(true)
 {
 }
 
-void Command::errorDown(std::string info)
+void Command::errorDown(std::wstring info)
 {
-    std::cout << info << std::endl;
+    std::wcout << info << std::endl;
     succ = false;
 }
 

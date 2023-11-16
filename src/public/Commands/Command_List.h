@@ -5,5 +5,5 @@ class Command_List : public Command
 {
 public:
     virtual void exec(EditorState &state) override;
-    Command_List(std::string raw_para, std::vector<std::string> para);
+    Command_List(std::wstring raw_para, std::vector<std::wstring> para);
 };

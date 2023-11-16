@@ -2,25 +2,25 @@
 #include "EditorState.h"
 #include "MarkDownFile.h"
 #include "ParamUtil.h"
-using std::string, std::vector;
+using std::wstring, std::vector;
 
 void Command_Redo::exec(EditorState &state)
 {
     if (state.command_history_empty())
     {
-        errorDown("no history command");
+        errorDown(L"no history command");
         return;
     }
     auto last_cmd = state.command_history_back();
     if (!(last_cmd->getType() == CommandType::kUndo))
     {
-        errorDown("you can only use 'redo' after 'undo'.");
+        errorDown(L"you can only use 'redo' after 'undo'.");
         return;
     }
     last_cmd->undo(state);
 }
 
-Command_Redo::Command_Redo(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kRedo)
+Command_Redo::Command_Redo(wstring raw_para, vector<wstring> para) : Command(raw_para, para, CommandType::kRedo)
 {
     add2HistoryStack = true;
     canUndo = false;

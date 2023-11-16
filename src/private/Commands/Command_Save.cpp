@@ -2,7 +2,7 @@
 #include "EditorState.h"
 #include "MarkDownFile.h"
 #include "ParamUtil.h"
-using std::string, std::vector;
+using std::wstring, std::vector;
 void Command_Save::exec(EditorState &state)
 {
     for (auto file : state.load_files)
@@ -11,7 +11,7 @@ void Command_Save::exec(EditorState &state)
     }
 }
 
-Command_Save::Command_Save(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kSave)
+Command_Save::Command_Save(wstring raw_para, vector<wstring> para) : Command(raw_para, para, CommandType::kSave)
 {
     add2HistoryStack = true;
     canUndo = false;

@@ -16,7 +16,7 @@ bool MarkDownTitle::hasChild()
 {
     return true;
 }
-std::string MarkDownTitle::getStr(bool raw)
+std::wstring MarkDownTitle::getStr(bool raw)
 {
     if (raw)
         return prefix + content;
@@ -28,7 +28,7 @@ bool MarkDownTitle::hasStr()
     return true;
 }
 
-MarkDownTitle::MarkDownTitle(std::string raw_str) : MarkDownComponent(ComponentType::kTitle)
+MarkDownTitle::MarkDownTitle(std::wstring raw_str) : MarkDownComponent(ComponentType::kTitle)
 {
     assert(raw_str[0] == '#');
     auto lastPos = raw_str.find_first_not_of('#', 0);
@@ -44,7 +44,7 @@ bool MarkDownTitle::isHigherThan(MarkDownComponent *comp)
 {
     if (comp->type == ComponentType::kRoot)
     {
-        std::cout << "You can't compare MarkDownRoot to MarkDownTitle" << std::endl;
+        std::wcout << "You can't compare MarkDownRoot to MarkDownTitle" << std::endl;
         return false;
     }
     else if (comp->type == ComponentType::kBody)
@@ -65,9 +65,9 @@ void MarkDownTitle::flushChildrenList()
     childrenList.clear();
 }
 
-std::string MarkDownTitle::getForShowStr()
+std::wstring MarkDownTitle::getForShowStr()
 {
-    std::string str_cp = content;
+    std::wstring str_cp = content;
     str_cp.erase(std::remove_if(str_cp.begin(), str_cp.end(), ::isspace), str_cp.end());
     return str_cp;
 }

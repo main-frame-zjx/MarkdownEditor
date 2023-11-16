@@ -12,10 +12,9 @@ using std::wstring;
 
 void MarkDownEditor::Launch()
 {
-    // 设置输出流的locale为UTF-8
-    std::wcout.imbue(std::locale("en_US.UTF-8"));
-    state.addListener(new CommandHistoryListener("command_history.txt"));
-    state.addListener(new FileHistoryListener("file_history.txt"));
+    std::wcout.imbue(std::locale());
+    state.addListener(new CommandHistoryListener(L"command_history.txt"));
+    state.addListener(new FileHistoryListener(L"file_history.txt"));
     while (true)
     {
 

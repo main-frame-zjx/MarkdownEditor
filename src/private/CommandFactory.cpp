@@ -19,70 +19,70 @@
 #include "Command_DirTree.h"
 #include "ParamUtil.h"
 
-Command *CommandFactory::GetCommand(std::string raw_para)
+Command *CommandFactory::GetCommand(std::wstring raw_para)
 {
-    std::vector<std::string> para = stringSplit(raw_para, ' ');
-    if (para[0] == std::string("load"))
+    std::vector<std::wstring> para = stringSplit(raw_para, ' ');
+    if (para[0] == std::wstring(L"load"))
     {
         return new Command_Load(raw_para, para);
     }
-    else if (para[0] == std::string("ws"))
+    else if (para[0] == std::wstring(L"ws"))
     {
         return new Command_WorkSpace(raw_para, para);
     }
-    else if (para[0] == std::string("switch"))
+    else if (para[0] == std::wstring(L"switch"))
     {
         return new Command_Switch(raw_para, para);
     }
-    else if (para[0] == std::string("save"))
+    else if (para[0] == std::wstring(L"save"))
     {
         return new Command_Save(raw_para, para);
     }
-    else if (para[0] == std::string("insert"))
+    else if (para[0] == std::wstring(L"insert"))
     {
         return new Command_Insert(raw_para, para);
     }
-    else if (para[0] == std::string("append-head"))
+    else if (para[0] == std::wstring(L"append-head"))
     {
         return new Command_AppendHead(raw_para, para);
     }
-    else if (para[0] == std::string("append-tail"))
+    else if (para[0] == std::wstring(L"append-tail"))
     {
         return new Command_AppendTail(raw_para, para);
     }
-    else if (para[0] == std::string("delete"))
+    else if (para[0] == std::wstring(L"delete"))
     {
         return new Command_Delete(raw_para, para);
     }
-    else if (para[0] == std::string("undo"))
+    else if (para[0] == std::wstring(L"undo"))
     {
         return new Command_Undo(raw_para, para);
     }
-    else if (para[0] == std::string("redo"))
+    else if (para[0] == std::wstring(L"redo"))
     {
         return new Command_Redo(raw_para, para);
     }
-    else if (para[0] == std::string("list"))
+    else if (para[0] == std::wstring(L"list"))
     {
         return new Command_List(raw_para, para);
     }
-    else if (para[0] == std::string("exit"))
+    else if (para[0] == std::wstring(L"exit"))
     {
         return new Command_Exit(raw_para, para);
     }
-    else if (para[0] == std::string("history"))
+    else if (para[0] == std::wstring(L"history"))
     {
         return new Command_History(raw_para, para);
     }
-    else if (para[0] == std::string("stats"))
+    else if (para[0] == std::wstring(L"stats"))
     {
         return new Command_Stats(raw_para, para);
     }
-    else if (para[0] == std::string("list-tree"))
+    else if (para[0] == std::wstring(L"list-tree"))
     {
         return new Command_ListTree(raw_para, para);
     }
-    else if (para[0] == std::string("dir-tree"))
+    else if (para[0] == std::wstring(L"dir-tree"))
     {
         return new Command_DirTree(raw_para, para);
     }

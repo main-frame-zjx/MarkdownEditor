@@ -7,10 +7,10 @@ class Command;
 class CommandHistoryListener : public LogListenerBase
 {
 private:
-    std::fstream logFile;
+    std::wfstream logFile;
 
 public:
-    CommandHistoryListener(std::string logPath);
+    CommandHistoryListener(std::wstring logPath);
     ~CommandHistoryListener();
     virtual void notifyAfterExec(Command *cmd, EditorState &state) override;
 };

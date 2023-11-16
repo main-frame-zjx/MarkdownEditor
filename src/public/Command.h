@@ -33,8 +33,8 @@ protected:
   CommandType type;
   bool add2HistoryStack = true;
   bool canUndo = false;
-  std::vector<std::string> para;
-  std::string raw_para;
+  std::vector<std::wstring> para;
+  std::wstring raw_para;
   bool succ;
   virtual void exec(EditorState &state) = 0;
 
@@ -44,9 +44,9 @@ public:
   bool getAdd2HistoryStack() { return add2HistoryStack; }
   bool getSucc() { return succ; }
   bool getCanUndo() { return canUndo; }
-  Command(std::string raw_para, std::vector<std::string> para, CommandType type);
+  Command(std::wstring raw_para, std::vector<std::wstring> para, CommandType type);
   CommandType getType() { return type; }
-  void errorDown(std::string info);
-  std::string getRawPara() { return raw_para; }
-  std::vector<std::string> getPara() { return para; }
+  void errorDown(std::wstring info);
+  std::wstring getRawPara() { return raw_para; }
+  std::vector<std::wstring> getPara() { return para; }
 };

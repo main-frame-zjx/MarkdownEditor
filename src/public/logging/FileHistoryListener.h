@@ -7,10 +7,10 @@ class Command;
 class FileHistoryListener : public LogListenerBase
 {
 private:
-    std::fstream logFile;
+    std::wfstream logFile;
 
 public:
-    FileHistoryListener(std::string logPath);
+    FileHistoryListener(std::wstring logPath);
     ~FileHistoryListener();
     virtual void notifyBeforeExec(Command *cmd, EditorState &state) override;
 };

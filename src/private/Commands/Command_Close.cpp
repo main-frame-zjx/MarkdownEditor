@@ -3,26 +3,26 @@
 #include "MarkDownFile.h"
 #include "ParamUtil.h"
 #include <iostream>
-using std::string, std::vector;
+using std::wstring, std::vector;
 void Command_Close::exec(EditorState &state)
 {
     int close_index = getIntParam(para, 1) - 1;
     if (close_index < 0)
     {
-        errorDown("index should > 0");
+        errorDown(L"index should > 0");
         return;
     }
     if (close_index >= state.load_files.size())
     {
-        errorDown("index should less than " + std::to_string(state.load_files.size()));
+        errorDown(L"index should less than " + std::to_wstring(state.load_files.size()));
         return;
     }
     if (state.load_files[close_index]->isDirty())
     {
-        std::cout << "save changed file before closing? (y/n)" << std::endl;
-        string line;
-        std::getline(std::cin, line);
-        if (line == "y")
+        std::wcout << L"save changed file before closing? (y/n)" << std::endl;
+        wstring line;
+        std::getline(std::wcin, line);
+        if (line == L"y")
             state.load_files[close_index]->save();
     }
     if (state.current_focus_file == close_index)
@@ -37,7 +37,7 @@ void Command_Close::exec(EditorState &state)
     delete file;
 }
 
-Command_Close::Command_Close(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kClose)
+Command_Close::Command_Close(wstring raw_para, vector<wstring> para) : Command(raw_para, para, CommandType::kClose)
 {
     add2HistoryStack = false;
     canUndo = false;

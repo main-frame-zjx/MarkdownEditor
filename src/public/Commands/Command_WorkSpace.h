@@ -5,5 +5,5 @@ class Command_WorkSpace : public Command
 {
 public:
     virtual void exec(EditorState &state) override;
-    Command_WorkSpace(std::string raw_para, std::vector<std::string> para);
+    Command_WorkSpace(std::wstring raw_para, std::vector<std::wstring> para);
 };

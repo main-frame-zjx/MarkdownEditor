@@ -3,7 +3,7 @@
 #include "MarkDownFile.h"
 #include "ParamUtil.h"
 #include "iostream"
-using std::string, std::vector;
+using std::wstring, std::vector;
 
 void Command_Delete::exec(EditorState &state)
 {
@@ -15,14 +15,13 @@ void Command_Delete::exec(EditorState &state)
         {
             state.load_files[state.current_focus_file]->deleteLine(delete_line, &this->delete_word);
         }
-        catch (string msg)
+        catch (wstring msg)
         {
             errorDown(msg);
         }
         return;
     }
-    string word = getLongStrParam(raw_para, 1);
-    std::cout << "word: " << word << std::endl;
+    wstring word = getLongStrParam(raw_para, 1);
     if (!word.empty())
     {
         // printf("here\n");
@@ -32,7 +31,7 @@ void Command_Delete::exec(EditorState &state)
             state.load_files[state.current_focus_file]->deleteWord(word, &this->delete_line, &this->delete_word);
             // printf("finish\n");
         }
-        catch (string msg)
+        catch (wstring msg)
         {
             printf("catch\n");
             errorDown(msg);
@@ -40,10 +39,10 @@ void Command_Delete::exec(EditorState &state)
 
         return;
     }
-    errorDown("delete command's param error!");
+    errorDown(L"delete command's param error!");
 }
 
-Command_Delete::Command_Delete(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kDelete)
+Command_Delete::Command_Delete(wstring raw_para, vector<wstring> para) : Command(raw_para, para, CommandType::kDelete)
 {
     add2HistoryStack = true;
     canUndo = true;

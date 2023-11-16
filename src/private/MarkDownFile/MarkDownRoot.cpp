@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-using std::string;
+using std::wstring;
 std::list<MarkDownComponent *>
 MarkDownRoot::getChildrenList()
 {
@@ -18,9 +18,9 @@ bool MarkDownRoot::hasChild()
 {
     return true;
 }
-std::string MarkDownRoot::getStr(bool raw)
+std::wstring MarkDownRoot::getStr(bool raw)
 {
-    return "";
+    return L"";
 }
 bool MarkDownRoot::hasStr()
 {
@@ -39,7 +39,7 @@ bool MarkDownRoot::insertWord(int line, MarkDownComponent *comp)
     return true;
 }
 
-void MarkDownRoot::deleteLine(int line, std::string *store)
+void MarkDownRoot::deleteLine(int line, std::wstring *store)
 {
     if (line <= 0 || line - 1 >= childrenList.size())
     {
@@ -53,12 +53,12 @@ void MarkDownRoot::deleteLine(int line, std::string *store)
     delete comp;
 }
 
-void MarkDownRoot::deleteWord(std::string word, int *store_line, std::string *store_word)
+void MarkDownRoot::deleteWord(std::wstring word, int *store_line, std::wstring *store_word)
 {
     int line = 1;
     for (auto it = childrenList.begin(); it != childrenList.end(); it++)
     {
-        string str_cp = (*it)->getStr(false);
+        wstring str_cp = (*it)->getStr(false);
         // 去掉空格
         // str_cp = str_cp.substr(1, str_cp.length());
         str_cp.erase(std::remove_if(str_cp.begin(), str_cp.end(), ::isspace), str_cp.end());
@@ -83,7 +83,7 @@ bool MarkDownRoot::isHigherThan(MarkDownComponent *comp)
 {
     if (comp->type == ComponentType::kRoot)
     {
-        std::cout << "You can't compare two MarkDownRoot" << std::endl;
+        std::wcout << "You can't compare two MarkDownRoot" << std::endl;
         return false;
     }
     return true;
@@ -99,7 +99,7 @@ void MarkDownRoot::flushChildrenList()
     childrenList.clear();
 }
 
-std::string MarkDownRoot::getForShowStr()
+std::wstring MarkDownRoot::getForShowStr()
 {
-    return "";
+    return L"";
 }

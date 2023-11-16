@@ -3,17 +3,17 @@
 class MarkDownBody : public MarkDownComponent
 {
 private:
-    std::string content;
-    std::string prefix;
+    std::wstring content;
+    std::wstring prefix;
 
 public:
-    MarkDownBody(std::string raw_str);
+    MarkDownBody(std::wstring raw_str);
     virtual std::list<MarkDownComponent *> getChildrenList() override;
     ~MarkDownBody();
     virtual bool hasChild() override;
     virtual void addChild(MarkDownComponent *) override {}
-    virtual std::string getForShowStr() override;
-    virtual std::string getStr(bool raw) override;
+    virtual std::wstring getForShowStr() override;
+    virtual std::wstring getStr(bool raw) override;
     virtual bool hasStr() override;
     virtual bool isHigherThan(MarkDownComponent *) override;
     virtual void flushChildrenList() override {}

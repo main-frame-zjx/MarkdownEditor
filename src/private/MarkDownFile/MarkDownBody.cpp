@@ -13,7 +13,7 @@ bool MarkDownBody::hasChild()
 {
     return false;
 }
-std::string MarkDownBody::getStr(bool raw)
+std::wstring MarkDownBody::getStr(bool raw)
 {
     if (raw)
         return prefix + content;
@@ -25,7 +25,7 @@ bool MarkDownBody::hasStr()
     return true;
 }
 
-MarkDownBody::MarkDownBody(std::string raw_str) : MarkDownComponent(ComponentType::kBody)
+MarkDownBody::MarkDownBody(std::wstring raw_str) : MarkDownComponent(ComponentType::kBody)
 {
     auto lastPos = raw_str.find_first_of(' ', 0);
     int len = raw_str.length();
@@ -40,7 +40,7 @@ bool MarkDownBody::isHigherThan(MarkDownComponent *comp)
     return false;
 }
 
-std::string MarkDownBody::getForShowStr()
+std::wstring MarkDownBody::getForShowStr()
 {
     return prefix + content;
 }

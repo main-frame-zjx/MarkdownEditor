@@ -11,12 +11,12 @@ public:
     ~MarkDownRoot();
     virtual bool hasChild() override;
     virtual void addChild(MarkDownComponent *) override;
-    virtual std::string getStr(bool raw) override;
-    virtual std::string getForShowStr() override;
+    virtual std::wstring getStr(bool raw) override;
+    virtual std::wstring getForShowStr() override;
     virtual bool hasStr() override;
     virtual bool isHigherThan(MarkDownComponent *) override;
     virtual void flushChildrenList() override;
     bool insertWord(int line, MarkDownComponent *);
-    void deleteLine(int line, std::string *store = nullptr);
-    void deleteWord(std::string word, int *store_line = nullptr, std::string *store_word = nullptr);
+    void deleteLine(int line, std::wstring *store = nullptr);
+    void deleteWord(std::wstring word, int *store_line = nullptr, std::wstring *store_word = nullptr);
 };
