@@ -80,7 +80,14 @@ void MarkDownFile::deleteLine(int line, std::string *store)
 void MarkDownFile::deleteWord(std::string word, int *store_line, std::string *store_word)
 {
     dirty = true;
-    list_root->deleteWord(word, store_line, store_word);
+    try
+    {
+        list_root->deleteWord(word, store_line, store_word);
+    }
+    catch (std::string msg)
+    {
+        std::cout << msg << std::endl;
+    }
 }
 
 void MarkDownFile::list()

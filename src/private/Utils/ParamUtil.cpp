@@ -1,6 +1,7 @@
 
 #include <ParamUtil.h>
 #include <iostream>
+#include <exception>
 
 using std::string, std::vector;
 int getIntParam(const vector<string> &para, int index)

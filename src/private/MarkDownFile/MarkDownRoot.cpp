@@ -72,7 +72,8 @@ void MarkDownRoot::deleteWord(std::string word, int *store_line, std::string *st
         }
         line++;
     }
-    throw "not find word.";
+    std::cout << "not find word." << std::endl;
+    // throw "not find word.";
 }
 
 MarkDownRoot::MarkDownRoot() : MarkDownComponent(ComponentType::kRoot)
