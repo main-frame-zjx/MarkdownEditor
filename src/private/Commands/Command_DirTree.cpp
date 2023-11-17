@@ -10,7 +10,7 @@ void Command_DirTree::exec(EditorState &state)
     state.load_files[state.current_focus_file]->listDirTree(word);
 }
 
-Command_DirTree::Command_DirTree(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kList)
+Command_DirTree::Command_DirTree(string raw_para, vector<string> para) : Command(raw_para, para, CommandType::kDirTree)
 {
     add2HistoryStack = false;
     canUndo = false;
