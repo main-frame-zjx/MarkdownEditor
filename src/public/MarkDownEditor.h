@@ -7,6 +7,7 @@ private:
     EditorState state;
 
 public:
-    MarkDownEditor();
+    MarkDownEditor(bool logging = true);
     void Launch();
+    void exex_command(std::string str);
 };

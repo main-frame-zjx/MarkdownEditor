@@ -14,6 +14,7 @@ private:
     // std::chrono::system_clock::time_point editor_start_time;
 
 public:
+    bool exit = false;
     std::vector<MarkDownFile *> load_files;
     int current_focus_file;
     void command_history_push_back(Command *cmd);

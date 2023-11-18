@@ -11,10 +11,8 @@ using std::string;
 
 void MarkDownEditor::Launch()
 {
-    // 设置输出流的locale为UTF-8
-    state.addListener(new CommandHistoryListener("command_history.txt"));
-    state.addListener(new FileHistoryListener("file_history.txt"));
-    while (true)
+
+    while (!state.exit)
     {
 
         string line;
@@ -28,7 +26,17 @@ void MarkDownEditor::Launch()
     }
 }
 
-MarkDownEditor::MarkDownEditor()
+MarkDownEditor::MarkDownEditor(bool logging)
 {
-    ;
+    if (logging)
+    {
+        state.addListener(new CommandHistoryListener("command_history.txt"));
+        state.addListener(new FileHistoryListener("file_history.txt"));
+    }
+}
+
+void MarkDownEditor::exex_command(std::string str)
+{
+    Command *cmd = CommandFactory::GetCommand(str);
+    cmd->exec_wrapper(state);
 }

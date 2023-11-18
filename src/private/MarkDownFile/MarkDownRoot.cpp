@@ -43,13 +43,15 @@ void MarkDownRoot::deleteLine(int line, std::string *store)
 {
     if (line <= 0 || line - 1 >= childrenList.size())
     {
-        throw "Error: Index out of bounds."; // 返回 end() 表示无效位置
+        std::cout << "Error: Index out of bounds." << std::endl; // 返回 end() 表示无效位置
+        return;
     }
     auto pos = childrenList.begin();
     std::advance(pos, (line - 1));
     auto comp = *pos;
     childrenList.erase(pos);
-    *store = comp->getStr(true);
+    if (store)
+        *store = comp->getStr(true);
     delete comp;
 }
 
@@ -65,8 +67,10 @@ void MarkDownRoot::deleteWord(std::string word, int *store_line, std::string *st
         bool match = (str_cp == word);
         if (match)
         {
-            *store_word = (*it)->getStr(true);
-            *store_line = line;
+            if (store_word)
+                *store_word = (*it)->getStr(true);
+            if (store_line)
+                *store_line = line;
             childrenList.erase(it);
             return;
         }
