@@ -67,11 +67,11 @@ Group 3: Output matches the answer.
 
 ##### 2.2 白盒测试
 
-白盒单元测试使用 **googletest** 框架，和编译一起会得到 MarkDownEditor_test.exe
+白盒单元测试使用 **googletest** 框架，和编译一起会得到 **MarkDownEditor_test.exe**
 
 直接运行该 exe 会根据 **/test/** 目录下的 **.cc** 文件跑设计好的单元测试。并输出对应的通过情况。
 
-==图片==
+![](.\img\白盒自动测试截图.png)
 
 
 
@@ -83,7 +83,7 @@ lab1实验要求中给出的要求**全部完成**：
 - 日志模块，history命令，存在 **command_history.txt** 日志文件中
 - 统计模块，stats命令，存在 **file_history.txt** 日志文件中
 
-
+额外支持了exit命令，输入exit可以退出，未保存的文件不会保存。
 
 #### 4.使用说明
 
